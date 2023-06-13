@@ -15,7 +15,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-1.jpg" alt="rewiew-1" />
+                  <img src="/review-1.webp" alt="rewiew-1" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "I want to express my deep gratitude to the wonderful flower
@@ -31,7 +31,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-2.jpg" alt="rewiew-2" />
+                  <img src="/review-2.webp" alt="rewiew-2" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Ordered a bouquet from wonderful S.flower To be honest, the
@@ -47,7 +47,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-3.jpg" alt="rewiew-3" />
+                  <img src="/review-3.webp" alt="rewiew-3" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "I want to thank the “s.flower” team for their professional
@@ -63,7 +63,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-4.jpg" alt="rewiew-4" />
+                  <img src="/review-4.webp" alt="rewiew-4" />
                 </div>
                 <figcaption className={styles.review__back}>
                   " We would like to thank you for your excellent service! The
@@ -81,7 +81,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-5.jpg" alt="rewiew-5" />
+                  <img src="/review-5.webp" alt="rewiew-5" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Thank you very much for decorating our holiday! Everything
@@ -97,7 +97,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-6.jpg" alt="rewiew-6" />
+                  <img src="/review-6.webp" alt="rewiew-6" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Thank you very much for a very beautiful bouquet and pleasant
@@ -115,7 +115,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-7.jpg" alt="rewiew-7" />
+                  <img src="/review-7.webp" alt="rewiew-7" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Placed an order with this store. Many thanks for the service
@@ -132,7 +132,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-8.jpg" alt="rewiew-8" />
+                  <img src="/review-8.webp" alt="rewiew-8" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Great service! Timely delivery and a beautiful fresh bouquet,
@@ -147,7 +147,7 @@ const Reviews = () => {
             <a href="/">
               <figure>
                 <div className={styles.review__front}>
-                  <img src="/review-9.jpg" alt="rewiew-9" />
+                  <img src="/review-9.webp" alt="rewiew-9" />
                 </div>
                 <figcaption className={styles.review__back}>
                   "Ordered a bouquet and boutonnieres for the most important
