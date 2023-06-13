@@ -1,19 +1,25 @@
 import Link from "next/link";
 import React from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsPostcardHeart } from "react-icons/bs";
+import { GiFlowerPot, GiFlowers } from "react-icons/gi";
+import {
+  AiOutlineHome,
+  AiOutlineInfoCircle,
+  AiOutlineGift,
+} from "react-icons/ai";
+import { IoIosContact, IoMdRose } from "react-icons/io";
+import styles from "../styles/Home.module.sass";
 
 const data = [
-  { id: 1, name: "Home", url: "/" },
-  { id: 2, name: "About", url: "/about" },
-  { id: 3, name: "Categories", subMenu: true },
-  { id: 4, name: "Contact", url: "/contact" },
-];
-
-const subMenuData = [
-  { id: 1, name: "Jordan", doc_count: 11 },
-  { id: 2, name: "Sneakers", doc_count: 8 },
-  { id: 3, name: "Running shoes", doc_count: 64 },
-  { id: 4, name: "Football shoes", doc_count: 107 },
+  { id: 1, name: "Home", url: "/", icon: <AiOutlineHome size={18} /> },
+  {
+    id: 2,
+    name: "About",
+    url: "/about",
+    icon: <AiOutlineInfoCircle size={18} />,
+  },
+  { id: 3, name: "Caterories", subMenu: true, icon: <GiFlowers size={18} /> },
+  { id: 4, name: "Contact", url: "/contact", icon: <IoIosContact size={18} /> },
 ];
 
 const MenuMobile = ({
@@ -22,22 +28,31 @@ const MenuMobile = ({
   setMobileMenu,
   categories,
 }) => {
+  const categoryIcons = {
+    1: <IoMdRose size={18} />,
+    2: <GiFlowerPot size={18} />,
+    3: <AiOutlineGift size={18} />,
+    4: <BsPostcardHeart size={18} />,
+  };
   return (
-    <ul className="flex flex-col md:hidden font-bold absolute top-[50px] left-0 w-full h-[calc(100vh-50px)] bg-white border-t text-black">
+    <ul className={styles.menuMobile}>
       {data.map((item) => {
         return (
           <React.Fragment key={item.id}>
             {!!item?.subMenu ? (
               <li
-                className="cursor-pointer py-4 px-4 border-b flex flex-col relative"
+                className={styles.menuMobile__item}
                 onClick={() => setShowCatMenu(!showCatMenu)}
               >
-                <div className="flex justify-between items-center">
-                  {item.name}
+                <div className={styles.flex}>
+                  <div className="flex gap-2">
+                    <span className={styles.menu__icon}>{item.icon}</span>
+                    {item.name}
+                  </div>
                   <BsChevronDown size={14} />
                 </div>
                 {showCatMenu && (
-                  <ul className="bg-black/[0.05] -mx-5 mt-4 -mb-4">
+                  <ul className={styles.menuSubMobile}>
                     {categories?.map(({ attributes: c, id }) => {
                       return (
                         <Link
@@ -48,9 +63,9 @@ const MenuMobile = ({
                             setMobileMenu(false);
                           }}
                         >
-                          <li className="py-4 px-8 border-t flex justify-between">
+                          <li className={styles.menuSubMobile__item}>
                             {c.name}
-                            <span className="opacity-50 text-sm">{`(${c.products.data.length})`}</span>
+                            {categoryIcons[id]}
                           </li>
                         </Link>
                       );
@@ -59,8 +74,13 @@ const MenuMobile = ({
                 )}
               </li>
             ) : (
-              <li className="py-4 px-5 border-b">
-                <Link href={item?.url} onClick={() => setMobileMenu(false)}>
+              <li className={styles.menuSubMobile__link}>
+                <Link
+                  href={item?.url}
+                  onClick={() => setMobileMenu(false)}
+                  className="flex gap-2"
+                >
+                  <span className={styles.menu__icon}>{item.icon}</span>
                   {item.name}
                 </Link>
               </li>

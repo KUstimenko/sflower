@@ -4,6 +4,7 @@ import { fetchDataFromApi } from "@/utils/api";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import styles from "@/styles/Home.module.sass";
 const maxResult = 3;
 
 const Category = ({ category, products, slug }) => {
@@ -15,7 +16,7 @@ const Category = ({ category, products, slug }) => {
   }, [query]);
 
   const { data, error, isLoading } = useSWR(
-    `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
+    `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&[filters][isGift][$eq]=false&pagination[page]=${pageIndex}&pagination[pageSize]=${maxResult}`,
     fetchDataFromApi,
     {
       fallbackData: products,
@@ -25,30 +26,19 @@ const Category = ({ category, products, slug }) => {
   return (
     <div className="w-full md:py-20 relative">
       <Wrapper>
-        <div className="text-center max-w-[800px] mx-auto mt-8 md:mt-0">
-          <div className="text-[28px] md:text-[34px] mb-5 font-semibold leading-tight">
-            {category?.data?.[0]?.attributes?.name}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 my-14 px-5 md:px-0">
+        <h1 className={styles.categoryTitle}>
+          {category?.data?.[0]?.attributes?.name}
+        </h1>
+        <div className={styles.productCard}>
           {data?.data?.map((product) => (
             <ProductCard key={product?.id} data={product} />
           ))}
-          {/* <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard /> */}
         </div>
         {/* PAGINATION BUTTONS START */}
         {data?.meta?.pagination?.total > maxResult && (
-          <div className="flex gap-3 items-center justify-center my-16 md:my-0">
+          <div className={styles.buttonsPage}>
             <button
-              className={`rounded py-2 px-4 bg-black text-white disabled:bg-gray-200 disabled:text-gray-500`}
+              className={styles.buttonsPage__btn}
               disabled={pageIndex === 1}
               onClick={() => setPageIndex(pageIndex - 1)}
             >
@@ -60,7 +50,7 @@ const Category = ({ category, products, slug }) => {
             }`}</span>
 
             <button
-              className={`rounded py-2 px-4 bg-black text-white disabled:bg-gray-200 disabled:text-gray-500`}
+              className={styles.buttonsPage__btn}
               disabled={pageIndex === (data && data.meta.pagination.pageCount)}
               onClick={() => setPageIndex(pageIndex + 1)}
             >
@@ -71,7 +61,7 @@ const Category = ({ category, products, slug }) => {
         {/* PAGINATION BUTTONS END */}
         {isLoading && (
           <div className="absolute top-0 left-0 w-full h-full bg-white/[0.5] flex flex-col gap-5 justify-center items-center">
-            <img src="/logo.svg" width={150} />
+            <img src="/logo.svg" width={250} />
             <span className="text-2xl font-medium">Loading...</span>
           </div>
         )}
@@ -102,7 +92,7 @@ export async function getStaticProps({ params: { slug } }) {
     `/api/categories?filters[slug][$eq]=${slug}`
   );
   const products = await fetchDataFromApi(
-    `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&pagination[page]=1&pagination[pageSize]=${maxResult}`
+    `/api/products?populate=*&[filters][categories][slug][$eq]=${slug}&[filters][isGift][$eq]=false&pagination[page]=1&pagination[pageSize]=${maxResult}`
   );
 
   return {

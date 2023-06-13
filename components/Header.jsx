@@ -9,6 +9,7 @@ import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import { fetchDataFromApi } from "@/utils/api";
 import { useSelector } from "react-redux";
+import SearchForm from "./SearchForm";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -52,55 +53,51 @@ const Header = () => {
 
   return (
     <header
-      className={`w-full h-[50px] md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
+      className={`w-full h-[50px] ps-2 pe-8 md:h-[80px] bg-white flex items-center justify-between z-20 sticky top-0 transition-transform duration-300 ${show}`}
     >
-      <Wrapper className={styles.header__container}>
-        <Link href="/">
-          <img src="/logo.svg" className={styles.header__logo} alt="logo" />
-        </Link>
-        <Menu
+      <Link href="/">
+        <img src="/logo.svg" className={styles.header__logo} alt="logo" />
+      </Link>
+      <Menu
+        showCatMenu={showCatMenu}
+        setShowCatMenu={setShowCatMenu}
+        categories={categories}
+      />
+
+      {mobileMenu && (
+        <MenuMobile
           showCatMenu={showCatMenu}
           setShowCatMenu={setShowCatMenu}
+          setMobileMenu={setMobileMenu}
           categories={categories}
         />
-
-        {mobileMenu && (
-          <MenuMobile
-            showCatMenu={showCatMenu}
-            setShowCatMenu={setShowCatMenu}
-            setMobileMenu={setMobileMenu}
-            categories={categories}
-          />
-        )}
-        {/* <div className={styles.header__search}>
-          <SearchForm />
-        </div> */}
-        <div className={styles.header__cart}>
-          <Link href="/cart">
-            <div className={styles.header__cartLink}>
-              <BsCart className={styles.header__cartIcon} />
-              {cartItems.length > 0 && (
-                <div className={styles.header__cartDigit}>
-                  {cartItems.length}
-                </div>
-              )}
-            </div>
-          </Link>
-          <div className={styles.buttonActive}>
-            {mobileMenu ? (
-              <VscChromeClose
-                className="text-[16px]"
-                onClick={() => setMobileMenu(false)}
-              />
-            ) : (
-              <BiMenuAltRight
-                className="text-[20px]"
-                onClick={() => setMobileMenu(true)}
-              />
+      )}
+      <div className={styles.header__search}>
+        <SearchForm />
+      </div>
+      <div className={styles.header__cart}>
+        <Link href="/cart">
+          <div className={styles.header__cartLink}>
+            <BsCart className={styles.header__cartIcon} />
+            {cartItems.length > 0 && (
+              <div className={styles.header__cartDigit}>{cartItems.length}</div>
             )}
           </div>
+        </Link>
+        <div className={styles.buttonActive}>
+          {mobileMenu ? (
+            <VscChromeClose
+              className="text-[16px]"
+              onClick={() => setMobileMenu(false)}
+            />
+          ) : (
+            <BiMenuAltRight
+              className="text-[20px]"
+              onClick={() => setMobileMenu(true)}
+            />
+          )}
         </div>
-      </Wrapper>
+      </div>
     </header>
   );
 };
