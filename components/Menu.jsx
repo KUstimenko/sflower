@@ -1,37 +1,50 @@
 import Link from "next/link";
 import React from "react";
-import { BsChevronDown } from "react-icons/bs";
+import { GiFlowerPot, GiFlowers } from "react-icons/gi";
+import { BsChevronDown, BsPostcardHeart } from "react-icons/bs";
+import {
+  AiOutlineHome,
+  AiOutlineInfoCircle,
+  AiOutlineGift,
+} from "react-icons/ai";
+import { IoIosContact, IoMdRose } from "react-icons/io";
+import styles from "../styles/Home.module.sass";
 
 const data = [
-  { id: 1, name: "Home", url: "/" },
-  { id: 2, name: "About", url: "/about" },
-  { id: 3, name: "Categories", subMenu: true },
-  { id: 4, name: "Contact", url: "/contact" },
+  { id: 1, name: "Home", url: "/", icon: <AiOutlineHome size={18} /> },
+  {
+    id: 2,
+    name: "About",
+    url: "/about",
+    icon: <AiOutlineInfoCircle size={18} />,
+  },
+  { id: 3, name: "Caterories", subMenu: true, icon: <GiFlowers size={18} /> },
+  { id: 4, name: "Contact", url: "/contact", icon: <IoIosContact size={18} /> },
 ];
 
-// const subMenuData = [
-//   { id: 1, name: "Jordan", doc_count: 11 },
-//   { id: 2, name: "Sneakers", doc_count: 8 },
-//   { id: 3, name: "Running shoes", doc_count: 64 },
-//   { id: 4, name: "Football shoes", doc_count: 107 },
-// ];
-
 const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
+  const categoryIcons = {
+    1: <IoMdRose size={18} />,
+    2: <GiFlowerPot size={18} />,
+    3: <AiOutlineGift size={18} />,
+    4: <BsPostcardHeart size={18} />,
+  };
   return (
-    <ul className="hidden md:flex items-center gap-8 font-medium text-black">
+    <ul className={styles.menu}>
       {data.map((item) => {
         return (
           <React.Fragment key={item.id}>
             {!!item?.subMenu ? (
               <li
-                className="cursor-pointer flex items-center gap-2 relative"
+                className={styles.menu__item}
                 onMouseEnter={() => setShowCatMenu(true)}
                 onMouseLeave={() => setShowCatMenu(false)}
               >
+                <span className={styles.menu__icon}>{item.icon}</span>
                 {item.name}
                 <BsChevronDown size={14} />
                 {showCatMenu && (
-                  <ul className="bg-white absolute top-6 left-0 min-w-[250px] px-1 py-1 text-black shadow-lg">
+                  <ul className={styles.menuSub}>
                     {categories?.map(({ attributes: c, id }) => {
                       return (
                         <Link
@@ -39,9 +52,9 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                           href={`/category/${c.slug}`}
                           onClick={() => setShowCatMenu(false)}
                         >
-                          <li className="h-12 flex justify-between items-center px-3 hover:bg-black/[0.03] rounded-md">
+                          <li className={styles.menuSub__item}>
                             {c.name}
-                            <span className="opacity-50 text-sm">{`(${c.products.data.length})`}</span>
+                            {categoryIcons[id]}
                           </li>
                         </Link>
                       );
@@ -50,8 +63,11 @@ const Menu = ({ showCatMenu, setShowCatMenu, categories }) => {
                 )}
               </li>
             ) : (
-              <li className="cursor-pointer">
-                <Link href={item?.url}>{item.name}</Link>
+              <li>
+                <Link className={styles.menu__item} href={item?.url}>
+                  <span className={styles.menu__icon}>{item.icon}</span>
+                  {item.name}
+                </Link>
               </li>
             )}
           </React.Fragment>
