@@ -1,12 +1,26 @@
 import { updateCart, removeFromCart } from "@/store/cartSlice";
+import styles from "../styles/Home.module.sass";
 import Image from "next/image";
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartItem = ({ data }) => {
   const p = data.attributes;
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const hasBouquet = cartItems.some(
+    (item) => item.attributes.categories.data[0].attributes.name === "Bouquets"
+  );
+  const isPostcard = p.subtitle === "Postcard";
+  const imageClass =
+    isPostcard && hasBouquet
+      ? `${styles.cartItem__img} gift`
+      : styles.cartItem__img;
+  const isSelect =
+    isPostcard && hasBouquet
+      ? `${styles.cartItem__quantity} isSelect`
+      : styles.cartItem__quantity;
   const updateCartItem = (e, key) => {
     let payload = {
       key,
@@ -16,51 +30,41 @@ const CartItem = ({ data }) => {
     dispatch(updateCart(payload));
   };
   return (
-    <div className="flex py-5 gap-3 md:gap-5 border-b">
-      <div className="shrink-0 aspect-square w-[50px] md:w-[120px]">
+    <div className={styles.cartItem}>
+      <div className={imageClass}>
         <Image
-          src={p.thumbnail.data.attributes.url}
-          alt={p.name}
           width={120}
           height={120}
+          alt={p.name}
+          src={p.thumbnail.data.attributes.url}
         />
       </div>
-      <div className="w-full flex flex-col">
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="text-lg md:text-2xl font-semibold text-black/[0.8]">
-            {p.name}
-          </div>
-          <div className="text-sm md:text-md font-medium text-black/[0.5] block md:hidden">
-            {p.subtitle}
-          </div>
-          <div className="text-sm md:text-md font-bold text-black/[0.5] block mt-2">
-            MBP : &#8372;{p.price}
-          </div>
+      <div className={styles.cartItem__body}>
+        <div className={styles.cartItem__top}>
+          <p className={styles.cartItem__title}>{p.name}</p>
+          <span className={styles.cartItem__price}>&#8372; {p.price}</span>
         </div>
-        <div className="text-md font-medium text-black/[0.5] hidden md:block">
-          {p.subtitle}
-        </div>
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center gap-2 md:gap-10 text-black/[0.5] text-sm md:text-md">
-            <div className="flex items-center gap-1">
-              <div className="font-semibold">Quantity:</div>
-              <select
-                className="hover:text-black"
-                onChange={(e) => updateCartItem(e, "quantity")}
-              >
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((q, i) => {
-                  return (
-                    <option key={i} value={q} selected={data.quantity === q}>
-                      {q}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
+        <p className={styles.cartItem__subtitle}>{p.subtitle}</p>
+        <div className={styles.cartItem__bottom}>
+          <div className={isSelect}>
+            <h3 className="font-semibold">Quantity:</h3>
+            <select
+              className={styles.cartItem__quantitySelect}
+              value={data.quantity}
+              onChange={(e) => updateCartItem(e, "quantity")}
+            >
+              {Array.from({ length: 15 }, (_, i) => i + 1).map((q, i) => {
+                return (
+                  <option key={i} value={q}>
+                    {q}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <RiDeleteBin6Line
+            className={styles.cartItem__remove}
             onClick={() => dispatch(removeFromCart({ id: data.id }))}
-            className="cursor-pointer text-black/[0.5] hover:text-black text-[16px] md:text-[20px]"
           />
         </div>
       </div>

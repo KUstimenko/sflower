@@ -44,7 +44,7 @@ const Footer = () => {
             {/* MENU START */}
             <div className={styles.footer__menuColumn}>
               <div className={styles.footer__menuTitle}>About</div>
-              <Link href="/news.js">
+              <Link href="/news">
                 <div className={styles.footer__menuText}>News</div>
               </Link>
 

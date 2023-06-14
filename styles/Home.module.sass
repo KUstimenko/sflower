@@ -336,13 +336,11 @@ $white:#fff
     font-size: 40px
     line-height: 57px
     letter-spacing: 0.2px
-    color: var(--main-text)
     margin-bottom: 10px
   &__text
     font-weight: 500
     line-height: 20px
     letter-spacing: 0.2px 
-    color: var(--second-text)
     margin-bottom: 10px
   &__img
     max-width: 600px
@@ -384,20 +382,20 @@ $white:#fff
     padding: 1rem
   &__title
     font-weight: 500
-    font-size: 1.125rem
-    line-height: 1.75rem
-    height: 60px
+    font-size: .8rem
+    line-height: 1.6rem
+    height: 80px
   &__info
     display: flex
     align-items: center
   &__price
     font-weight: 600
     margin-right: 0.5rem
-    font-size: 1.125rem
+    font-size: 1rem
     line-height: 1.75rem
   &__originalprice
     font-weight: 500
-    font-size: 1rem
+    font-size: .9rem
     line-height: 1.5rem
     text-decoration-line: line-through
   &__discount
@@ -405,7 +403,7 @@ $white:#fff
     margin-left: auto
     font-size: 1rem
     line-height: 1.5rem
-    color: #bbe1a8
+    color: rgb(234 88 12 / 1)
 .categoryTitle
   font-size: 28px
   margin-bottom: 1.25rem
@@ -418,7 +416,6 @@ $white:#fff
   display: flex
   flex-direction: column
   gap: 30px
-  flex: 1, 1
   &__carousel
     width: 100%
     flex: 1.5
@@ -427,18 +424,19 @@ $white:#fff
     margin-right: auto
 
 .productDetailsInfo
-  max-width: 340px
-  display: flex
-  flex-direction: column
-  justify-content: center
-  gap: 20px
+  flex: 1
+  padding-top: 0.75rem
+  padding-bottom: 0.75rem
   &__title
     font-weight: 600
     font-size: 18px
+    margin-bottom: 0.5rem
   &__subtitle
     font-size: 16px
+    margin-bottom: 1.25rem
   &__description
     font-size: 14px
+    margin-top: 2.5rem
   
 .productDetailsBuy
   display: flex
@@ -446,6 +444,7 @@ $white:#fff
   gap: 5px
   align-items: center
   font-size: 18px
+  margin-bottom: 2.5rem
   &__price
     font-weight: 700
   &__button
@@ -556,6 +555,7 @@ $white:#fff
     background: #fff
     color: #000
     transform: rotateY(-180deg)
+    
 
   
 .footer
@@ -632,9 +632,9 @@ $white:#fff
     gap: 3rem
     padding: 2.5rem 0
   &__left
-    flex: 2
+    flex: 2.2
   &__right
-    flex: 1
+    flex: 0.8
 .cartItem
   display: flex
   padding: 1.25rem 0
@@ -802,6 +802,11 @@ $white:#fff
     grid-template-columns: repeat(2, minmax(0, 1fr))
     padding-left: 0px
     padding-right: 0px
+    &__title
+      font-size: 1.125rem
+      height: 70px
+    &__price
+      font-size: 1.125rem
   .categoryTitle
     font-size: 34px
     margin-top: 0
@@ -839,11 +844,11 @@ $white:#fff
     &__top
       flex-direction: row
     &__title
-      font-size: 1.25rem
+      font-size: 1rem
     &__subtitle
       display: block
     &__price
-      font-size: 1.2rem
+      font-size: 1rem
     &__remove
       cursor: pointer
       font-size: 20px  
