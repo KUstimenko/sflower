@@ -22,14 +22,14 @@ const About = () => {
               </p>
               <div className="flex justify-center items-center pt-4">
                 <img
-                  src="about-1.png"
+                  src="about-1.webp"
                   alt="sflower team"
                   className={styles.headerBlock__img}
                 />
               </div>
             </div>
             <div className={`${styles.about__body} ${styles.about__first}`}>
-              <img src="about-2.png" className={styles.about__img} />
+              <img src="about-2.webp" className={styles.about__img} />
               <div className={styles.about__content}>
                 <h2 className={styles.about__title}>Our bouquets</h2>
                 <div className={styles.about__text}>
@@ -48,10 +48,10 @@ const About = () => {
                   our bouquets from others.
                 </div>
               </div>
-              <img src="about-3.png" className={styles.about__img} />
+              <img src="about-3.webp" className={styles.about__img} />
             </div>
             <div className={`${styles.about__body} ${styles.about__first}`}>
-              <img src="about-4.png" className={styles.about__img} />
+              <img src="about-4.webp" className={styles.about__img} />
               <div className={styles.about__content}>
                 <h2 className={styles.about__title}>Weddings</h2>
                 <div className={styles.about__text}>
